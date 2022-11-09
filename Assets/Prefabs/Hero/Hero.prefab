@@ -12,9 +12,12 @@ GameObject:
   - component: {fileID: 8596716990555865087}
   - component: {fileID: 6798037618024221543}
   - component: {fileID: 2517125921082751349}
+  - component: {fileID: 8596716989632742641}
+  - component: {fileID: 8596716989632742645}
+  - component: {fileID: 8596716989632742646}
   m_Layer: 0
   m_Name: Hero
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -106,7 +109,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &2517125921082751349
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -120,10 +123,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
+  m_Offset: {x: 0, y: 0.72}
   m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    border: {x: 2, y: 0.049999997, z: 2.04, w: 1.01}
+    pivot: {x: 0.51, y: 0.025}
     oldSize: {x: 5.12, y: 2.56}
     newSize: {x: 5.12, y: 2.56}
     adaptiveTilingThreshold: 0.5
@@ -131,5 +134,49 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 1.4}
+  m_Size: {x: 0.75, y: 1.42}
   m_EdgeRadius: 0
+--- !u!114 &8596716989632742641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8596716990555865086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b768cbd0fe9232d43a794a317ccc8f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 5
+  _offset: 5
+  smoothTime: 0.5
+  MoveVelocity: {x: 0, y: 0, z: 0}
+--- !u!114 &8596716989632742645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8596716990555865086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a376710ed62a4906813bcca8b0996b10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surfacePosition: {x: 0, y: 0}
+  isGrounded: 1
+  _offset: 0.4
+--- !u!114 &8596716989632742646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8596716990555865086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b7fb70a40d4b3b830f62b8cff85715, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _jumpForce: 20
