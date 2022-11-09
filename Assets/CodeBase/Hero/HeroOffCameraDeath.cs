@@ -2,20 +2,21 @@
 
 namespace CodeBase.Hero
 {
-    [RequireComponent(typeof(SpriteRenderer))]
     public class HeroOffCameraDeath : MonoBehaviour
     {
-        private SpriteRenderer _renderer;
+        private HeroDeath _heroDeath;
 
         private void Awake()
         {
-            _renderer = GetComponent<SpriteRenderer>();
+            _heroDeath = GetComponent<HeroDeath>();
         }
 
-        private void LateUpdate()
+        private void Update()
         {
-            if (!_renderer.isVisible)
-                ;
+            Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
+
+            if (screenPosition.x > Screen.width || screenPosition.x < 0) 
+                _heroDeath.Died?.Invoke();
         }
     }
 }

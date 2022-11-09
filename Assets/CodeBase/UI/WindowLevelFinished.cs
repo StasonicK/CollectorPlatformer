@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace CodeBase.UI
@@ -30,12 +28,14 @@ namespace CodeBase.UI
         {
             Destroy(_level);
             Instantiate(_level);
+            Destroy(this);
         }
 
         private void ToNextLevel()
         {
             Destroy(_level);
             Instantiate(_nextlevel);
+            Destroy(this);
         }
     }
 }
