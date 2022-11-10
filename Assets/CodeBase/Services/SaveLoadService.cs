@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CodeBase.Progress;
+using UnityEngine;
 
 namespace CodeBase.Services
 {
@@ -6,19 +7,19 @@ namespace CodeBase.Services
     {
         private const string ProgressKey = "Progress";
 
-        private ProgressService _progressService;
+        public ProgressService ProgressService { get; private set; }
 
         public SaveLoadService(ProgressService progressService)
         {
-            _progressService = progressService;
+            ProgressService = progressService;
         }
 
         public void SaveProgress()
         {
-            PlayerPrefs.SetString(ProgressKey, _progressService.Progress.ToJson());
+            PlayerPrefs.SetString(ProgressKey, ProgressService.Progress.ToJson());
         }
 
-        public Progress LoadProgress() =>
-            PlayerPrefs.GetString(ProgressKey)?.ToDeserialized<Progress>();
+        public PlayerProgress LoadProgress() =>
+            PlayerPrefs.GetString(ProgressKey)?.ToDeserialized<PlayerProgress>();
     }
 }

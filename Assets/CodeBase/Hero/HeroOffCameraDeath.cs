@@ -15,7 +15,7 @@ namespace CodeBase.Hero
         {
             Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
 
-            if (screenPosition.x > Screen.width || screenPosition.x < 0) 
+            if (screenPosition.x > Screen.width || screenPosition.x < 0)
                 _heroDeath.Died?.Invoke();
         }
     }

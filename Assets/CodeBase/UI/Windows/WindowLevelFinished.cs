@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using CodeBase.Services;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace CodeBase.UI
@@ -8,10 +9,12 @@ namespace CodeBase.UI
         [SerializeField] private Button _restartLevelButton;
         [SerializeField] private Button _nextLevelButton;
         [SerializeField] private Image _image;
-        [SerializeField] private GameObject _level;
-        [SerializeField] private GameObject _nextlevel;
+
+        private GameObject _level;
+        private GameObject _nextlevel;
 
         private string _nextLevelName;
+        private LevelLoader _levelLoader;
 
         private void Awake()
         {
@@ -19,22 +22,21 @@ namespace CodeBase.UI
             _nextLevelButton.onClick.AddListener(ToNextLevel);
         }
 
-        public void Construct(Sprite sprite)
+        public void Construct(Sprite sprite, LevelLoader levelLoader)
         {
             _image.sprite = sprite;
+            _levelLoader = levelLoader;
         }
 
         private void RestartLevel()
         {
-            Destroy(_level);
-            Instantiate(_level);
+            _levelLoader.RestartLevel?.Invoke();
             Destroy(this);
         }
 
         private void ToNextLevel()
         {
-            Destroy(_level);
-            Instantiate(_nextlevel);
+            _levelLoader.ToNextLevel?.Invoke();
             Destroy(this);
         }
     }
