@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: WindowNextLevel
   m_EditorClassIdentifier: 
   WindowId: 1
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 5173721942393740153, guid: 5515a71a90e07f74496f17832889bf7d, type: 3}

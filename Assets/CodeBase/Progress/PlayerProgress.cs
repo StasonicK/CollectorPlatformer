@@ -2,52 +2,74 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.StaticData.Levels;
+using UnityEngine;
 
 namespace CodeBase.Progress
 {
     [Serializable]
     public class PlayerProgress
     {
-        private List<LevelId> _allLevels;
-        private Dictionary<LevelId, LevelData> _levelsProgress;
+        private List<LevelId> _allLevelIds;
+        private Dictionary<LevelId, LevelData> _levelsProgress = new Dictionary<LevelId, LevelData>();
 
         public LevelData CurrentLevelData { get; private set; }
         public LevelId CurrentLevelId { get; private set; }
         public LevelId NextLevelId { get; private set; }
 
+        public Action CurrentLevelDataChanged;
+
         public PlayerProgress()
         {
-            _allLevels = Enum.GetValues(typeof(LevelId)).Cast<LevelId>().ToList();
+            _allLevelIds = Enum.GetValues(typeof(LevelId)).Cast<LevelId>().ToList();
 
-            CurrentLevelId = _allLevels[1];
+            for (int i = 1; i < _allLevelIds.Count; i++)
+                _levelsProgress[_allLevelIds[i]] = new LevelData();
+
+            CurrentLevelId = _allLevelIds[1];
             int currentLevelIndex = FindIndex();
             CurrentLevelData = _levelsProgress[CurrentLevelId];
 
-            NextLevelId = CheckLevelIndex(++currentLevelIndex) ? _allLevels[1] : LevelId.Empty;
+            NextLevelId = CheckLevelIndex(++currentLevelIndex) ? _allLevelIds[1] : LevelId.Empty;
         }
 
         public void UpLevel()
         {
             int currentLevelIndex = FindIndex();
-            CurrentLevelId = _allLevels[++currentLevelIndex];
-            NextLevelId = _allLevels[currentLevelIndex + 2];
+            CurrentLevelId = _allLevelIds[++currentLevelIndex];
+            CurrentLevelData = _levelsProgress[CurrentLevelId];
+            NextLevelId = _allLevelIds[currentLevelIndex + 2];
         }
 
         private int FindIndex() =>
-            _allLevels.FindIndex(x => x == CurrentLevelId);
+            _allLevelIds.FindIndex(x => x == CurrentLevelId);
 
         private bool CheckLevelIndex(int index)
         {
-            if (_allLevels.Count - 1 <= index)
+            if (_allLevelIds.Count - 1 <= index)
                 return true;
             else
                 return false;
         }
 
+        public void IncreaseCollectedCount()
+        {
+            CurrentLevelData.CollectedMedalsCount++;
+            CurrentLevelDataChanged?.Invoke();
+        }
+
+        public void InitCurrentLevelData(int maxCount)
+        {
+            CurrentLevelData.CollectedMedalsCount = 0;
+            CurrentLevelData.AllMedalsCount = maxCount;
+        }
+
+        public void SetMedalSprite(Sprite medalSprite) =>
+            CurrentLevelData.MedalSprite = medalSprite;
+
         public LevelData GetCurrentLevelData() =>
             _levelsProgress[CurrentLevelId];
 
-        public void SetCurrentLevelData(LevelData levelData) =>
-            _levelsProgress[CurrentLevelId] = levelData;
+        public void SaveCurrentLevelData() =>
+            _levelsProgress[CurrentLevelId] = CurrentLevelData;
     }
 }

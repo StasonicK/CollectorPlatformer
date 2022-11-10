@@ -12,10 +12,16 @@ namespace CodeBase.UI.Hud
 
         private SaveLoadService _saveLoadService;
 
-        public void Construct(Sprite sprite, SaveLoadService saveLoadService)
+        public void Construct(SaveLoadService saveLoadService)
         {
             _saveLoadService = saveLoadService;
+        }
 
+        public void InitializeCounter(int maxCount) =>
+            _saveLoadService.ProgressService.Progress.InitCurrentLevelData(maxCount);
+
+        public void UpdateCounter()
+        {
             LevelData levelData = _saveLoadService.ProgressService.Progress.GetCurrentLevelData();
             _collectedAmulets.text = levelData.CollectedMedalsCount.ToString();
             _allAmulets.text = levelData.AllMedalsCount.ToString();

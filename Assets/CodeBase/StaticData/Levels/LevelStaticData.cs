@@ -6,7 +6,7 @@ namespace CodeBase.StaticData.Levels
     public class LevelStaticData : ScriptableObject
     {
         public LevelId LevelId;
-        public int AmuletsCount;
+        public int MaxAmuletsCount;
         public GameObject Prefab;
     }
 }

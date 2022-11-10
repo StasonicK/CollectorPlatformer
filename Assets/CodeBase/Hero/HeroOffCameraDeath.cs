@@ -1,22 +1,23 @@
-﻿using UnityEngine;
+﻿using CodeBase.Services;
+using CodeBase.StaticData.Windows;
+using UnityEngine;
 
 namespace CodeBase.Hero
 {
     public class HeroOffCameraDeath : MonoBehaviour
     {
-        private HeroDeath _heroDeath;
-
-        private void Awake()
-        {
-            _heroDeath = GetComponent<HeroDeath>();
-        }
+        [SerializeField] private GameObject _levelLoaderGameObject;
 
         private void Update()
         {
             Vector2 screenPosition = Camera.main.WorldToScreenPoint(transform.position);
 
             if (screenPosition.x > Screen.width || screenPosition.x < 0)
-                _heroDeath.Died?.Invoke();
+            {
+                LevelLoader levelLoader = _levelLoaderGameObject.GetComponent<LevelLoader>();
+                levelLoader.SetMedal();
+                levelLoader.CreateWindow(WindowId.LevelRestart);
+            }
         }
     }
 }

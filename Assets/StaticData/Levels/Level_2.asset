@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51fecd358edb4efe901293a2a5e958c1, type: 3}
   m_Name: Level_2
   m_EditorClassIdentifier: 
-  LevelId: 1
+  LevelId: 2
+  MaxAmuletsCount: 2
   Prefab: {fileID: 6355566992943182628, guid: 1366f818b04c3de49a7c75418d3bb1dc, type: 3}

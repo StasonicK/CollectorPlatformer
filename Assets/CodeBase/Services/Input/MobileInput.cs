@@ -8,7 +8,5 @@ namespace CodeBase.Services.Input
         [SerializeField] private Button _leftArrowButton;
         [SerializeField] private Button _rightArrowButton;
         [SerializeField] private Button _jumpArrowButton;
-        
-        
     }
 }
