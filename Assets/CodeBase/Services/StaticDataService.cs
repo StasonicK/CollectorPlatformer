@@ -25,7 +25,6 @@ namespace CodeBase.Services
                 .ToDictionary(x => x.WindowId, x => x);
         }
 
-
         public LevelStaticData ForLevel(LevelId levelId) =>
             _levels.TryGetValue(levelId, out LevelStaticData staticData)
                 ? staticData

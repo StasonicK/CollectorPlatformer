@@ -18,11 +18,11 @@ namespace CodeBase.UI.Hud
         }
 
         public void InitializeCounter(int maxCount) =>
-            _saveLoadService.ProgressService.Progress.InitCurrentLevelData(maxCount);
+            _saveLoadService.Progress.InitCurrentLevelData(maxCount);
 
         public void UpdateCounter()
         {
-            LevelData levelData = _saveLoadService.ProgressService.Progress.GetCurrentLevelData();
+            LevelData levelData = _saveLoadService.Progress.GetCurrentLevelData();
             _collectedAmulets.text = levelData.CollectedMedalsCount.ToString();
             _allAmulets.text = levelData.AllMedalsCount.ToString();
         }

@@ -7,16 +7,17 @@ namespace CodeBase.Services
     {
         private const string ProgressKey = "Progress";
 
-        public ProgressService ProgressService { get; private set; }
+        public PlayerProgress Progress { get; private set; }
+        // public ProgressService ProgressService { get; private set; }
 
-        public SaveLoadService(ProgressService progressService)
+        public SaveLoadService(PlayerProgress progress)
         {
-            ProgressService = progressService;
+            Progress = progress;
         }
 
         public void SaveProgress()
         {
-            PlayerPrefs.SetString(ProgressKey, ProgressService.Progress.ToJson());
+            PlayerPrefs.SetString(ProgressKey, Progress.ToJson());
         }
 
         public PlayerProgress LoadProgress() =>

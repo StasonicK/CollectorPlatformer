@@ -18,9 +18,9 @@ namespace CodeBase.Services
         [SerializeField] private Sprite _silverMedalSprite;
 
         public GameObject RootUIGameObject;
+        
         private GameObject _currentLevelGameObject;
         private LevelStaticData _currentLevelStaticData;
-
         private StaticDataService _staticDataService;
         private SaveLoadService _saveLoadService;
         private PlayerProgress _playerProgress;
@@ -33,7 +33,7 @@ namespace CodeBase.Services
         {
             _staticDataService = new StaticDataService();
             _staticDataService.Load();
-            _saveLoadService = new SaveLoadService(new ProgressService());
+            _saveLoadService = new SaveLoadService(new PlayerProgress());
 
             ToNextLevel += LaunchNextLevel;
             RestartLevel += LaunchRestartLevel;
