@@ -1,27 +1,27 @@
 ﻿using CodeBase.Services;
+using CodeBase.Services.Levels;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.UI
+namespace CodeBase.UI.Windows
 {
     public class WindowLevelRestart : MonoBehaviour
     {
         [SerializeField] private Button _restartLevelButton;
 
+        private ILevelLoader _levelLoader;
+
         private void Awake()
         {
             _restartLevelButton.onClick.AddListener(RestartLevel);
-        }
-
-        public void Construct(LevelLoader levelLoader)
-        {
+            _levelLoader = AllServices.Container.Single<ILevelLoader>();
         }
 
         private void RestartLevel()
         {
-            // Destroy(_level);
-            // Instantiate(_level);
-            Destroy(this);
+            _levelLoader.RestartLevel();
+            Time.timeScale = 1;
+            Destroy(gameObject);
         }
     }
 }

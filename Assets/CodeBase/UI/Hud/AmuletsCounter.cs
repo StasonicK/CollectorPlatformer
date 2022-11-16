@@ -1,5 +1,5 @@
 ﻿using CodeBase.Progress;
-using CodeBase.Services;
+using CodeBase.Services.PersistentProgress;
 using TMPro;
 using UnityEngine;
 
@@ -10,21 +10,24 @@ namespace CodeBase.UI.Hud
         [SerializeField] private TextMeshProUGUI _collectedAmulets;
         [SerializeField] private TextMeshProUGUI _allAmulets;
 
-        private SaveLoadService _saveLoadService;
+        private LevelData _currentLevelData;
+        private IPersistentProgressService _progressService;
 
-        public void Construct(SaveLoadService saveLoadService)
+        public void Construct(IPersistentProgressService progressService)
         {
-            _saveLoadService = saveLoadService;
+            _progressService = progressService;
+            _currentLevelData = progressService.Progress.CurrentLevelData;
+
+            progressService.Progress.CurrentLevelDataChanged += UpdateCounter;
         }
 
         public void InitializeCounter(int maxCount) =>
-            _saveLoadService.Progress.InitCurrentLevelData(maxCount);
+            _progressService.Progress.InitCurrentLevelData(maxCount);
 
-        public void UpdateCounter()
+        private void UpdateCounter()
         {
-            LevelData levelData = _saveLoadService.Progress.GetCurrentLevelData();
-            _collectedAmulets.text = levelData.CollectedMedalsCount.ToString();
-            _allAmulets.text = levelData.AllMedalsCount.ToString();
+            _collectedAmulets.text = _currentLevelData.CollectedMedalsCount.ToString();
+            _allAmulets.text = _currentLevelData.AllMedalsCount.ToString();
         }
     }
 }

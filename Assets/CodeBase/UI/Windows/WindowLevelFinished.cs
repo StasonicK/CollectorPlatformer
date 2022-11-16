@@ -1,8 +1,9 @@
 ﻿using CodeBase.Services;
+using CodeBase.Services.Levels;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CodeBase.UI
+namespace CodeBase.UI.Windows
 {
     public class WindowLevelFinished : MonoBehaviour
     {
@@ -10,34 +11,32 @@ namespace CodeBase.UI
         [SerializeField] private Button _nextLevelButton;
         [SerializeField] private Image _image;
 
-        private GameObject _level;
-        private GameObject _nextlevel;
-
-        private string _nextLevelName;
-        private LevelLoader _levelLoader;
+        private ILevelLoader _levelLoader;
 
         private void Awake()
         {
             _restartLevelButton.onClick.AddListener(RestartLevel);
             _nextLevelButton.onClick.AddListener(ToNextLevel);
+            _levelLoader = AllServices.Container.Single<ILevelLoader>();
         }
 
-        public void Construct(Sprite sprite, LevelLoader levelLoader)
+        public void Construct(Sprite sprite)
         {
             _image.sprite = sprite;
-            _levelLoader = levelLoader;
         }
 
         private void RestartLevel()
         {
-            _levelLoader.RestartLevel?.Invoke();
-            Destroy(this);
+            _levelLoader.RestartLevel();
+            Time.timeScale = 1;
+            Destroy(gameObject);
         }
 
         private void ToNextLevel()
         {
-            _levelLoader.ToNextLevel?.Invoke();
-            Destroy(this);
+            _levelLoader.NextLevel();
+            Time.timeScale = 1;
+            Destroy(gameObject);
         }
     }
 }

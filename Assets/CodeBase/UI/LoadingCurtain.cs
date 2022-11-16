@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace CodeBase.UI
@@ -12,22 +11,13 @@ namespace CodeBase.UI
         private const int MaximumAlpha = 1;
         private const float StepAlpha = 0.03f;
 
-        public Action Show;
-        public Action Hide;
-
-        private void Awake()
-        {
-            Show += ShowLoadingCurtain;
-            Hide += HideLoadingCurtain;
-        }
-
-        private void ShowLoadingCurtain()
+        public void Show()
         {
             gameObject.SetActive(true);
             _curtain.alpha = MaximumAlpha;
         }
 
-        private void HideLoadingCurtain() =>
+        public void Hide() =>
             StartCoroutine(FadeOut());
 
         private IEnumerator FadeOut()

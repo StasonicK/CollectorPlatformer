@@ -3,6 +3,7 @@ namespace CodeBase.StaticData.Windows
     public enum WindowId
     {
         LevelRestart,
-        LevelFinished
+        LevelFinished,
+        GameFinished
     }
 }
