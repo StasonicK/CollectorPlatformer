@@ -50,7 +50,7 @@ namespace CodeBase.Infrastructure
             _allServices.Single<IPersistentProgressService>().SetPlayerProgress(_allServices.Single<ISaveLoadService>().LoadProgress() ?? NewPlayerProgress());
         }
 
-        private static PlayerProgress NewPlayerProgress()
+        private PlayerProgress NewPlayerProgress()
         {
             PlayerProgress progress = new PlayerProgress();
             progress.Initialize();

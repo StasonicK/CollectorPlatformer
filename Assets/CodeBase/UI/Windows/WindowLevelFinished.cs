@@ -28,14 +28,12 @@ namespace CodeBase.UI.Windows
         private void RestartLevel()
         {
             _levelLoader.RestartLevel();
-            Time.timeScale = 1;
             Destroy(gameObject);
         }
 
         private void ToNextLevel()
         {
             _levelLoader.NextLevel();
-            Time.timeScale = 1;
             Destroy(gameObject);
         }
     }

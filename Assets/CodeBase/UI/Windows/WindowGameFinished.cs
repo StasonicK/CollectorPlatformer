@@ -35,17 +35,16 @@ namespace CodeBase.UI.Windows
         private void RestartLevel()
         {
             _levelLoader.RestartLevel();
-            Time.timeScale = 1;
             Destroy(gameObject);
         }
 
         private void ToNewGame()
         {
-            _progressService.SetPlayerProgress(new PlayerProgress());
-            _saveLoadService.ClearProgress();
+            PlayerProgress playerProgress = new PlayerProgress();
+            playerProgress.Initialize();
+            _progressService.SetPlayerProgress(playerProgress);
             _saveLoadService.SaveProgress();
             _levelLoader.RestartLevel();
-            Time.timeScale = 1;
             Destroy(gameObject);
         }
     }

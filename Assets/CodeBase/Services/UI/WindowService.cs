@@ -29,13 +29,16 @@ namespace CodeBase.Services.UI
                 case WindowId.LevelFinished:
                     WindowLevelFinished windowLevelFinished = window.GetComponent<WindowLevelFinished>();
                     windowLevelFinished.Construct(_progressService.Progress.CurrentLevelData.MedalSprite);
+                    Time.timeScale = 0;
                     break;
                 case WindowId.GameFinished:
                     WindowGameFinished windowGameFinished = window.GetComponent<WindowGameFinished>();
                     windowGameFinished.Construct(_progressService.Progress.CurrentLevelData.MedalSprite);
+                    Time.timeScale = 0;
                     break;
                 case WindowId.LevelRestart:
                     window.GetComponent<WindowLevelRestart>();
+                    Time.timeScale = 0;
                     break;
             }
         }

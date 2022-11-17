@@ -26,7 +26,6 @@ namespace CodeBase.Level
         {
             if (col.TryGetComponent<HeroMovement>(out HeroMovement hero))
             {
-                Time.timeScale = 0;
                 _levelLoader.SetMedal();
 
                 bool isNextLevelEmpty = _progressService.Progress.NextLevelId == LevelId.Empty;

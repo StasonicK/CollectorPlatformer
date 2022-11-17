@@ -6,6 +6,5 @@ namespace CodeBase.Services.SaveLoad
     {
         void SaveProgress();
         PlayerProgress LoadProgress();
-        void ClearProgress();
     }
 }

@@ -23,7 +23,6 @@ namespace CodeBase.Hero
             {
                 if (screenPosition.x > Screen.width || screenPosition.x < 0 || screenPosition.y < 0)
                 {
-                    Time.timeScale = 0;
                     _windowService.CreateWindow(WindowId.LevelRestart);
                     _windowCreated = true;
                 }

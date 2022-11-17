@@ -22,8 +22,5 @@ namespace CodeBase.Services.SaveLoad
             PlayerProgress progress = PlayerPrefs.GetString(ProgressKey)?.ToDeserialized<PlayerProgress>();
             return progress;
         }
-
-        public void ClearProgress() =>
-            _progressService.SetPlayerProgress(new PlayerProgress());
     }
 }

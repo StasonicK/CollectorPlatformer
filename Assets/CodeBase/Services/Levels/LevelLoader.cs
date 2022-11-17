@@ -43,6 +43,7 @@ namespace CodeBase.Services.Levels
             DestroyHero();
             CreateLevelHero();
             HideLoadingCurtain();
+            Time.timeScale = 1;
         }
 
         public void RestartLevel()
@@ -58,6 +59,7 @@ namespace CodeBase.Services.Levels
 
             CreateLevelHero();
             HideLoadingCurtain();
+            Time.timeScale = 1;
         }
 
         private void ClearResult() =>
