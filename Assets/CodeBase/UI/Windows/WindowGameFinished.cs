@@ -2,6 +2,7 @@
 using CodeBase.Services;
 using CodeBase.Services.Levels;
 using CodeBase.Services.PersistentProgress;
+using CodeBase.Services.SaveLoad;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,7 @@ namespace CodeBase.UI.Windows
         [SerializeField] private Image _image;
 
         private ILevelLoader _levelLoader;
+        private ISaveLoadService _saveLoadService;
         private IPersistentProgressService _progressService;
 
         private void Awake()
@@ -21,6 +23,7 @@ namespace CodeBase.UI.Windows
             _restartLevelButton.onClick.AddListener(RestartLevel);
             _newGameButton.onClick.AddListener(ToNewGame);
             _levelLoader = AllServices.Container.Single<ILevelLoader>();
+            _saveLoadService = AllServices.Container.Single<ISaveLoadService>();
             _progressService = AllServices.Container.Single<IPersistentProgressService>();
         }
 
@@ -39,6 +42,8 @@ namespace CodeBase.UI.Windows
         private void ToNewGame()
         {
             _progressService.SetPlayerProgress(new PlayerProgress());
+            _saveLoadService.ClearProgress();
+            _saveLoadService.SaveProgress();
             _levelLoader.RestartLevel();
             Time.timeScale = 1;
             Destroy(gameObject);

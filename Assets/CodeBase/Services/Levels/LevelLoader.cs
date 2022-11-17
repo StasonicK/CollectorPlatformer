@@ -32,6 +32,9 @@ namespace CodeBase.Services.Levels
             _uiFactory = uiFactory;
         }
 
+        public GameObject GetHeroGameObject() =>
+            _heroGameObject;
+
         public void NextLevel()
         {
             ShowLoadingCurtain();
@@ -62,11 +65,11 @@ namespace CodeBase.Services.Levels
 
         private async void CreateLevelHero()
         {
-            GameObject levelGameObject = _levelFactory.CreateLevel();
-            Level.Level level = levelGameObject.GetComponent<Level.Level>();
-            _currentLevelGameObject = Object.Instantiate(levelGameObject);
+            _currentLevelGameObject = await _levelFactory.CreateLevel();
+            Level.Level level = _currentLevelGameObject.GetComponent<Level.Level>();
             _heroGameObject = await level.CreateHero();
             _uiFactory.CreateAmuletCounter();
+            _uiFactory.CreateControls(_heroGameObject);
         }
 
         private void SaveResult()

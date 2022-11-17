@@ -6,5 +6,6 @@ namespace CodeBase.Services.UI
     {
         void CreateAmuletCounter();
         Transform GetRootUI();
+        void CreateControls(GameObject hero);
     }
 }

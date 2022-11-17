@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Threading.Tasks;
+using UnityEngine;
 
 namespace CodeBase.Services.Levels
 {
     public interface ILevelFactory : IService
     {
-        public GameObject CreateLevel();
+        public Task<GameObject> CreateLevel();
     }
 }

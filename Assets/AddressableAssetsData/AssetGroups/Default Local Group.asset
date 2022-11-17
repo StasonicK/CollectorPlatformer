@@ -21,8 +21,20 @@ MonoBehaviour:
     m_Address: Hero
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 518c1b584df84ec41a03bb0546d9c542
-    m_Address: Hud
+  - m_GUID: 18aee2aa497616a489f59a0a78ca9a97
+    m_Address: Controls_container
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 40cbd013ac2370a42b835f73a8e6f617
+    m_Address: Amulets_container
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1366f818b04c3de49a7c75418d3bb1dc
+    m_Address: Level_2
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 306b340c6242f42479ed0511bf16b48a
+    m_Address: Level_1
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

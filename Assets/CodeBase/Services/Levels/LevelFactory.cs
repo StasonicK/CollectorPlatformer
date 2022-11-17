@@ -1,7 +1,9 @@
-﻿using CodeBase.Services.PersistentProgress;
+﻿using System.Threading.Tasks;
+using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.StaticData;
 using CodeBase.StaticData.Levels;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace CodeBase.Services.Levels
 {
@@ -17,11 +19,11 @@ namespace CodeBase.Services.Levels
             _progressService = progressService;
         }
 
-        public GameObject CreateLevel()
+        public async Task<GameObject> CreateLevel()
         {
             LevelId currentLevelId = _progressService.Progress.CurrentLevelId;
             _currentLevelStaticData = _staticDataService.ForLevel(currentLevelId);
-            return _currentLevelStaticData.Prefab;
+            return await Addressables.InstantiateAsync(_currentLevelStaticData.LevelName).Task;
         }
     }
 }

@@ -5,36 +5,41 @@ namespace CodeBase.Hero
     public class HeroJump : MonoBehaviour
     {
         [SerializeField] private float _jumpForce = 5f;
+        [SerializeField] private float _offset = 0.1f;
 
+        public string jumpButton = "Jump";
         private float _velocity;
-        private GroundCheck _groundCheck;
+        private BoxCollider2D _boxCollider2D;
         private float _gravity = -9.81f;
         private float _gravityScale = 5;
-        private bool _jumped;
 
         private void Awake()
         {
-            _groundCheck = GetComponent<GroundCheck>();
+            _boxCollider2D = GetComponent<BoxCollider2D>();
         }
 
         private void Update()
         {
             _velocity += _gravity * _gravityScale * Time.deltaTime;
 
-            if (_groundCheck.isGrounded && _velocity <= 0)
+            if (IsGrounded() && _velocity <= 0)
             {
                 _velocity = 0;
 
-                if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)))
+                if (SimpleInput.GetButtonDown(jumpButton))
                     Jump();
             }
 
             transform.Translate(new Vector2(0, _velocity) * Time.deltaTime);
         }
 
-        private void Jump()
+        private bool IsGrounded()
         {
-            _velocity = _jumpForce;
+            RaycastHit2D raycastHit2D = Physics2D.Raycast(_boxCollider2D.bounds.center, Vector3.down, _boxCollider2D.bounds.extents.y + _offset);
+            return raycastHit2D != null;
         }
+
+        private void Jump() =>
+            _velocity = _jumpForce;
     }
 }

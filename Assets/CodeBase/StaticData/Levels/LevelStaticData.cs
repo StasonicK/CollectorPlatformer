@@ -7,6 +7,6 @@ namespace CodeBase.StaticData.Levels
     {
         public LevelId LevelId;
         public int MaxAmuletsCount;
-        public GameObject Prefab;
+        public string LevelName;
     }
 }

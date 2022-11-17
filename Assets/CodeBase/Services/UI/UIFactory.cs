@@ -9,7 +9,8 @@ namespace CodeBase.Services.UI
 {
     public class UIFactory : IUIFactory
     {
-        private GameObject _hudCounterGameObject;
+        private GameObject _amuletsCounterGameObject;
+        private GameObject _controlsCounterGameObject;
 
         private IPersistentProgressService _progressService;
         private IStaticDataService _staticDataService;
@@ -30,16 +31,20 @@ namespace CodeBase.Services.UI
 
         public async void CreateAmuletCounter()
         {
-            if (_hudCounterGameObject == null)
-                _hudCounterGameObject = await Addressables.InstantiateAsync(AddressablePaths.Hud, _rootUI).Task;
+            if (_amuletsCounterGameObject == null)
+                _amuletsCounterGameObject = await Addressables.InstantiateAsync(AddressablePaths.Amulets, _rootUI).Task;
 
-            GameObject _amuletsCounterGameObject = _hudCounterGameObject.transform.GetChild(0).gameObject;
             _amuletsCounter = _amuletsCounterGameObject.GetComponent<AmuletsCounter>();
             _amuletsCounter.Construct(_progressService);
             LevelId currentLevelId = _progressService.Progress.CurrentLevelId;
             _currentLevelStaticData = _staticDataService.ForLevel(currentLevelId);
             _amuletsCounter.InitializeCounter(_currentLevelStaticData.MaxAmuletsCount);
-            Object.Instantiate(_amuletsCounterGameObject, _rootUI.transform);
+        }
+
+        public async void CreateControls(GameObject hero)
+        {
+            if (_controlsCounterGameObject == null)
+                _controlsCounterGameObject = await Addressables.InstantiateAsync(AddressablePaths.Controls, _rootUI).Task;
         }
     }
 }

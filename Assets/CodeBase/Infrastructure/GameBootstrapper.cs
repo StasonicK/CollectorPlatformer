@@ -1,6 +1,5 @@
 ﻿using CodeBase.Progress;
 using CodeBase.Services;
-using CodeBase.Services.Input;
 using CodeBase.Services.Levels;
 using CodeBase.Services.PersistentProgress;
 using CodeBase.Services.SaveLoad;
@@ -16,17 +15,15 @@ namespace CodeBase.Infrastructure
         [SerializeField] private Sprite _goldMedalSprite;
         [SerializeField] private Sprite _silverMedalSprite;
         [SerializeField] private LoadingCurtain _curtain;
-        [SerializeField] private GameObject _mobileInputGameObject;
         [SerializeField] private GameObject _rootUIGameObject;
 
-        private AllServices _allServices = new AllServices();
+        private readonly AllServices _allServices = AllServices.Container;
 
         private void Awake()
         {
             RegisterServices();
             LoadResources();
             LoadLevel();
-            CreateInput();
             DontDestroyOnLoad(this);
         }
 
@@ -63,11 +60,6 @@ namespace CodeBase.Infrastructure
         private void LoadLevel()
         {
             _allServices.Single<ILevelLoader>().RestartLevel();
-        }
-
-        private void CreateInput()
-        {
-            MobileInput mobileInput = _mobileInputGameObject.GetComponent<MobileInput>();
         }
     }
 }

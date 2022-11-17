@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelId: 2
   MaxAmuletsCount: 2
-  Prefab: {fileID: 6355566992943182628, guid: 1366f818b04c3de49a7c75418d3bb1dc, type: 3}
+  LevelName: Level_2
