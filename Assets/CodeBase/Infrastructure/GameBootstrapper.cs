@@ -1,4 +1,5 @@
-﻿using CodeBase.Progress;
+﻿
+using CodeBase.Progress;
 using CodeBase.Services;
 using CodeBase.Services.Levels;
 using CodeBase.Services.PersistentProgress;
@@ -6,12 +7,14 @@ using CodeBase.Services.SaveLoad;
 using CodeBase.Services.StaticData;
 using CodeBase.Services.UI;
 using CodeBase.UI;
+using OneSignalSDK;
 using UnityEngine;
 
 namespace CodeBase.Infrastructure
 {
     public class GameBootstrapper : MonoBehaviour
     {
+        private const string OneSignalAppId = "2e390310-3b0f-470f-bc58-f5491deee9aa";
         [SerializeField] private Sprite _goldMedalSprite;
         [SerializeField] private Sprite _silverMedalSprite;
         [SerializeField] private LoadingCurtain _curtain;
@@ -25,6 +28,11 @@ namespace CodeBase.Infrastructure
             LoadResources();
             LoadLevel();
             DontDestroyOnLoad(this);
+        }
+
+        private void Start()
+        {
+            OneSignal.Default.Initialize(OneSignalAppId);
         }
 
         private void RegisterServices()
